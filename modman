@@ -1,0 +1,3 @@
+bootstrap   app/etc/modules/Danslo_WebsiteLimit.xml
+code        app/code/local/Danslo/WebsiteLimit
+

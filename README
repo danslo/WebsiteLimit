@@ -1,0 +1,10 @@
+This code is very incomplete, please do not consider using this on a live environment without making drastic changes.
+It does not limit customers, nor does it limit categories. It does however limit everything on the dashboard, configuration scopes, products, orders, invoices, etc.
+
+I have tried my best not to use any rewrites. Unfortunately in some cases due to lack of core support of certain events some anti-patterns were used (instanceof as primary example) to avoid using rewrites (which are nastier).
+
+Instructions:
+1) For every limited user, set a website. (Edit the admin user)
+2) Make sure that the user enters the admin page through his own specific storeview. Otherwise there will be a nice 404.
+
+Have fun.

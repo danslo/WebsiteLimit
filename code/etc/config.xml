@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <global>
+        <models>
+            <websitelimit>
+                <class>Danslo_WebsiteLimit_Model</class>
+            </websitelimit>
+        </models>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <permissions_user_edit_tab_main>Danslo_WebsiteLimit_Block_Permissions_User_Edit_Tab_Main</permissions_user_edit_tab_main>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <events>
+            <!-- We can't use the adminhtml area because it is not loaded when stores are initialized.
+                 Unfortunately we also must observe the core event, because store and website collections
+                 do not expose an eventPrefix
+
+                 The alternative? Rewriting core classes... I think we need to settle for this. -->
+            <core_collection_abstract_load_before>
+                <observers>
+                    <websitelimit_limit_websites>
+                        <class>websitelimit/observer</class>
+                        <method>limitWebsites</method>
+                        <type>singleton</type>
+                    </websitelimit_limit_websites>
+                </observers>
+            </core_collection_abstract_load_before>
+
+            <!-- Product collection does not use above abstract event... -->
+            <!--<catalog_product_collection_load_before>
+                <observers>
+                    <websitelimit_limit_websites>
+                        <class>websitelimit/observer</class>
+                        <method>limitWebsites</method>
+                        <type>singleton</type>
+                    </websitelimit_limit_websites>
+                </observers>
+            </catalog_product_collection_load_before>-->
+
+            <!-- Neither does this -->
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <websitelimit_limit_websites>
+                        <class>websitelimit/observer</class>
+                        <method>limitWebsites</method>
+                        <type>singleton</type>
+                    </websitelimit_limit_websites>
+                </observers>
+            </eav_collection_abstract_load_before>
+        </events>
+        <resources>
+            <websitelimit_setup>
+                <setup>
+                    <module>Danslo_WebsiteLimit</module>
+                </setup>
+            </websitelimit_setup>
+        </resources>
+    </global>
+</config>
